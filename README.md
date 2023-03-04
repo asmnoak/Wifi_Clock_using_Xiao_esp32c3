@@ -14,5 +14,5 @@
 <li>RESETボタンを押す</li>
 </ol>
 <p>帆のように見えるのはWifiのアンテナである。XIAOとはI-PEXコネクタで接続する。右側の基板はアンテナの台として利用、XIAOには未接続である。</p>
-<p><img src="https://github.com/asmnoak/Wifi_Clock_using_Xiao_esp32c3/blob/master/xiao_esp32c3_clock.JPG" /></p>
+<p><img src="https://github.com/asmnoak/Wifi_Clock_using_Xiao_esp32c3/blob/main/xiao_esp32c3_clock.JPG" /></p>
 <p>&nbsp;</p>
