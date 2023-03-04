@@ -1,18 +1,18 @@
-<p><H3>Seeed Studio XIAO ESP32C3��Wifi�ɂ�鎞���ݒ肪�\�Ȏ��v�̐���</H3></p>
-<p><a title="XIAO_ESP32C3" href="https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/">Seeed Studio XIAO ESP32C3</a>��ESP32�݊���Wifi�����p�ł���MCU�i�}�C�N���R���g���[���j�ł���B�O�`��Seeed Studio XIAO�Ɠ����傫���A�����^�ł���B
-<p>NTP���玞���Ɠ��t���Q�Ƃ��AXIAO��RTC�i���A���^�C���N���b�N�j�ɐݒ肷�鎞�v�𐻍삵���B</p>
+<p><H3>Seeed Studio XIAO ESP32C3でWifiによる時刻設定が可能な時計の製作</H3></p>
+<p><a title="XIAO_ESP32C3" href="https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/">Seeed Studio XIAO ESP32C3</a>はESP32互換でWifiが利用できるMCU（マイクロコントローラ）である。外形はSeeed Studio XIAOと同じ大きさ、超小型である。
+<p>NTPから時刻と日付を参照し、XIAOのRTC（リアルタイムクロック）に設定する時計を製作した。</p>
 
-<p>�����֌W�̃��C�u�����iTimelib.h�j��<a title="timelib" href="https://github.com/PaulStoffregen/Time">������</a>�B�\���͒�Ԃ�SSD1306��OLED�A���C�u�����̓��C�u�����Ǘ����猟���\�iAdafruit�Łj�B</p>
-<p>Wifi�́A�Q��Wifi�X�e�[�V�����̂����A�d�g�̋������������őI���ł���悤�ɁAWiFiMulti.h���C�u���𗘗p�����i������Ȃ��ꍇ�͈����K���Ɏw�肷��΂悢�j�Bssid��password���A�N�Z�X����Wifi�X�e�[�V�����̂��̂ɕύX����B</p>
-<p>I2C�̐ڑ��̓f�t�H�[���g�iSDA�F�S�ASCK�F�T�j�ł悢�B</p>
-<p>XIAO ESP32C3�ɂ�Sleep�@�\������̂ŁA�����̍X�V���ȊO�̓X���[�v������ƁA�g�p�d�́i�\��mA�j��ߖ�ł���B�������A�X���[�v�������ArudionoIDE����X�P�b�`�̏������݂��ł��Ȃ��Ȃ�̂ŗv���ӂł���B�X���[�v��L���ɂ���̂́A�Ō�̏������ݎ��݂̂ɂ���K�v������B</br>�Ȃ��A�X���[�v��L���ɂ��Ă��܂�����͈ȉ��̎菇�ŕ����ł���B����́A�X�P�b�`�̌��ŁAXIAO ESP32C3�����Z�b�g���J��Ԃ��悤�ȏꍇ�ɂ����p�ł���̂Ŋo���Ă������l������Ǝv���B</p>
+<p>時刻関係のライブラリ（Timelib.h）は<a title="timelib" href="https://github.com/PaulStoffregen/Time">こちら</a>。表示は定番のSSD1306のOLED、ライブラリはライブラリ管理から検索可能（Adafruit版）。</p>
+<p>Wifiは、２つのWifiステーションのうち、電波の強い方を自動で選択できるように、WiFiMulti.hライブリを利用した（一つしかない場合は一方を適当に指定すればよい）。ssidとpasswordをアクセスするWifiステーションのものに変更する。</p>
+<p>I2Cの接続はデフォールト（SDA：４、SCK：５）でよい。</p>
+<p>XIAO ESP32C3にはSleep機能があるので、時刻の更新時以外はスリープさせると、使用電力（十数mA）を節約できる。ただし、スリープさせるとArudionoIDEからスケッチの書き込みができなくなるので要注意である。スリープを有効にするのは、最後の書き込み時のみにする必要がある。</br>なお、スリープを有効にしてしまった後は以下の手順で復旧できる。これは、スケッチの誤りで、XIAO ESP32C3がリセットを繰り返すような場合にも利用できるので覚えておく価値があると思う。</p>
 <ol>
-<li>USB�𔲂�</li>
-<li>BOOT�{�^�����������܂�USB��}���A�������܂�</li>
-<li>IDE����X�P�b�`����������</li>
-<li>�������݂�����������ABOOT�{�^���𗣂�</li>
-<li>RESET�{�^��������</li>
+<li>USBを抜く</li>
+<li>BOOTボタンを押したままUSBを挿す、押したまま</li>
+<li>IDEからスケッチを書き込む</li>
+<li>書き込みが完了したら、BOOTボタンを離す</li>
+<li>RESETボタンを押す</li>
 </ol>
-<p>���̂悤�Ɍ�����̂�Wifi�̃A���e�i�ł���BXIAO�Ƃ�I-PEX�R�l�N�^�Őڑ�����B�E���̊�̓A���e�i�̑�Ƃ��ė��p�AXIAO�ɂ͖��ڑ��ł���B</p>
-<p><img src="https://blogimg.goo.ne.jp/user_image/36/5b/2fe700344c5d56553bc3ddd0d520cd17.jpg" /></p>
+<p>帆のように見えるのはWifiのアンテナである。XIAOとはI-PEXコネクタで接続する。右側の基板はアンテナの台として利用、XIAOには未接続である。</p>
+<p><img src="https://github.com/asmnoak/Wifi_Clock_using_Xiao_esp32c3/blob/master/xiao_esp32c3_clock.JPG" /></p>
 <p>&nbsp;</p>
